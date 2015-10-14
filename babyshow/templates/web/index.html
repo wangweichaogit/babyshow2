@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+     <style type="text/css">
+.slider{display:none;}
+.focus span{width:5px;height:5px;margin-left:5px;border-radius:50%;background:#CDCDCD;font-size:0}
+.focus span.current{background:red;}
+ 
+
+.list_box{position:relative;}
+.list_box li{width:49.9%;float: left;box-sizing:border-box;margin-bottom: 10px;}
+.list_box li>div{margin: 0 5px;position: relative;background-color: #DAB96B;}
+.list_box li>div .number{display: block; width: 70px; height: 30px; background: #DAB96B; position: absolute; color: #fff; text-align: center; line-height: 32px; top: 0; right: 4%;}
+.list_box li>div .number:after{content: ''; width: 0; height: 0; position: absolute; top: 30px; right: 0; border-top: 10px solid #DAB96B; border-left: 35px solid transparent; border-right: 35px solid transparent;}
+.list_box li.mr0{margin-right: 0;}
+.list_box li img{width: 100%;}
+.list_box li p{float: left;line-height: 22px;color: #fff; width: 60%; padding-left: 5%;}
+.list_box li a.img{display: block; padding: 3px 3px 0;}
+.list_box li button.vote{float: right; width: 30%; height: 50px; background: #D48A60; line-height: 50px; color: #fff; font-size: 16px; text-align: center;}
+
+.prize{width: 150px;display: block; height: 30px; line-height: 30px; border-radius: 0 15px 15px 0; background: #DAB96B; font-size: 15px; text-align: center;color:#b22c00;}
+
+.bot_main{
+  width:100%; max-width:640px; height:50px; margin-left:auto; margin-right:auto;background-image:-webkit-linear-gradient(top,#fff 0,#e1e1e1 100%); background-image:linear-gradient(to bottom,#fff 0,#e1e1e1 100%); position:fixed; bottom:0px; z-index:9999;
+}
+.bot_main li{
+  float:left;
+}
+.bot_main img{
+  -webkit-transform:scale(1) rotate(0) translate3d(0,0,0); transform:scale(1) rotate(0) translate3d(0,0,0); width:25px; height:auto;
+}
+.bot_main li.ico_1{
+  width:25%; height:50px; background:url() right no-repeat;
+}
+.bot_main li.ico_1:active{
+  background-image:-webkit-linear-gradient(top,#fff 0,#c5c5c5 100%); background-image:linear-gradient(to bottom,#fff 0,#c5c5c5 100%);
+}
+.bot_main li.ico_1:visited{
+  background-image:-webkit-linear-gradient(top,#fff 0,#e1e1e1 100%); background-image:linear-gradient(to bottom,#fff 0,#e1e1e1 100%);
+}
+.bot_main li.ico_2{
+  width:25%; height:50px; background:url() right no-repeat; border:none; outline:none;
+}
+.bot_main li.ico_2:active{
+  background-image:-webkit-linear-gradient(top,#fff 0,#c5c5c5 100%); background-image:linear-gradient(to bottom,#fff 0,#c5c5c5 100%);
+}
+.bot_main li.ico_2:visited{
+  background-image:-webkit-linear-gradient(top,#fff 0,#e1e1e1 100%); background-image:linear-gradient(to bottom,#fff 0,#e1e1e1 100%);
+}
+.bot_main li.ico_3{
+  width:25%; height:50px; background:url() right no-repeat; border:none; outline:none;
+}
+.bot_main li.ico_3:active{
+  background-image:-webkit-linear-gradient(top,#fff 0,#c5c5c5 100%); background-image:linear-gradient(to bottom,#fff 0,#c5c5c5 100%);
+}
+.bot_main li.ico_3:visited{
+  background-image:-webkit-linear-gradient(top,#fff 0,#e1e1e1 100%); background-image:linear-gradient(to bottom,#fff 0,#e1e1e1 100%);
+}
+.bot_main li.ico_4{
+  width:25%; height:50px;
+}
+.bot_main li.ico_4:active{
+  background-image:-webkit-linear-gradient(top,#fff 0,#c5c5c5 100%); background-image:linear-gradient(to bottom,#fff 0,#c5c5c5 100%);
+}
+.bot_main li.ico_4:visited{
+  background-image:-webkit-linear-gradient(top,#fff 0,#e1e1e1 100%); background-image:linear-gradient(to bottom,#fff 0,#e1e1e1 100%);
+}
+.bot_main span{
+  display:inline-block; width:100%; height:50px;
+}
+.bot_main span.ico{
+  display:inline-block; width:100%; height:20px; padding-top:5px; text-align:center;
+}
+.bot_main span.ico img{
+  -webkit-transform:scale(1) rotate(0) translate3d(0,0,0); transform:scale(1) rotate(0) translate3d(0,0,0); width:22px; height:auto;display: block;
+border: 0px none;
+margin: 0px auto;
+padding: 0px;
+vertical-align: middle;
+}
+.bot_main span.txt{
+  width:100%; height:20px; text-align:center;
+}
+div#wrapper {
+    margin: 0px auto;
+    padding: 0px;
+    border: 0px none;
+    width: 1129px;
+    text-align: left;
+    background: transparent url("/ui/wrapper.gif") repeat-y scroll left top;
+}
+.padd
+{
+  margin: 0px auto;
+  padding: 3px;
+}
+#wrap {
+    min-height: 100%;
+    background-color: #EDF1F2;
+    height: auto !important;
+    margin: 0px auto -309px;
+    padding: 0px 0px 309px;
+}
+
+div#maincontent {
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    border: 0px none;
+    width: 740px;
+    background: transparent none repeat scroll 0% 0%;
+}
+.right {
+  text-align:right;
+  color:orange;
+  margin-right:90px;
+  }
+.color
+{
+  color:green;
+  }
+p.set
+{
+  color: #E9967A;
+  text-align: center;
+}
+</style>
+	
+   <title>Show Time.</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+   <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<!-- search头标签  -->
+ <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+          
+          <div id="navbar" class="navbar-collapse collapse">
+             <div>
+      <form class="navbar-form navbar-left" role="search" method = "get" action = '/app/'>
+         <div class="form-group">
+            <input type="text" name = "search" class="form-control" placeholder="Search">
+         </div>
+         <button type="submit" style="color:green" class="btn btn-default">Search</button>
+      </form>    
+   </div>
+   {% if user.is_authenticated %}
+                 <ul class="nav navbar-nav navbar-right">
+                 <li><p class="color">[  hello {{ user.username }} ... ] </p></li>
+              <li><a href="/app/logout/"><button style="color:red" type="button" class="btn btn-default btn-sm"  >
+  <span class="glyphicon glyphicon-fire"></span> Signout   
+  </button> </a></li>
+  {% else %}
+  <ul class="nav navbar-nav navbar-right">
+              <li><a href="#"><button style="color:red" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">
+  <span class="glyphicon glyphicon-user"></span> Signin
+
+</button> </a></li>
+  {% endif %}
+<li><a href="#">
+<button style="color:orange" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal2">
+  <span class="glyphicon glyphicon-music"></span> Register
+</button>
+ </a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>   
+      
+      
+<br><br><br>
+
+
+   <!-- 轮播（Carousel）项目 -->
+  <div id="myCarousel" class="carousel slide">
+   <!-- 轮播（Carousel）指标 -->
+   <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+   </ol>   
+   <!-- 轮播（Carousel）项目 -->
+   <div class="carousel-inner">
+      <div class="item active" style="background:url(5281f20348181.png); background-size:cover; background-position:center center;">
+         <img align="center" src="{% static "img/5281f20348181.png" %}" alt="First slide" height="150" whidth=50%>
+         <div class="container">
+            <div class="carousel-caption">
+              <h1>Example headline.</h1>
+              <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+            </div>
+          </div>
+         <div class="carousel-caption">1</div>
+      </div>
+      <div class="item" style="background:url(5281f20348181.png); background-size:cover; background-position:center center;">
+         <img align="center" src="{% static "img/5281f20348181.png" %}" alt="Second slide" >
+         <div class="carousel-caption"> 2</div>
+      </div>
+      <div class="item" style="background:url(5281f20348181.png); background-size:cover; background-position:center center;">
+         <img align="center" src="{% static "img/5281f20348181.png" %}" alt="Third slide">
+         <div class="carousel-caption">3</div>
+      </div>
+   </div>
+   <!-- 轮播（Carousel）导航 -->
+   <a class="carousel-control left" href="#myCarousel" 
+      data-slide="prev">&lsaquo;</a>
+   <a class="carousel-control right" href="#myCarousel" 
+      data-slide="next">&rsaquo;</a>
+</div>
+ 
+ <!-- picture -->
+
+ <div id="wrap">
+<div class="container">
+<div class="padd">
+ <div class="container marketing">
+  <div class="row">
+      {% for random1 in random_list%}
+        <div class="col-lg-4">
+          <img class="img-circle" src="/static{{random1.pi_photo}}" alt="Generic placeholder image" width="180" height="180">
+          <h2>姓名:{{ random1.pi_name }} </h2>
+          <p>{{random1.pi_desc}}</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        {%endfor%}
+  
+      </div><!-- /.row -->
+    </div>
+    </div>
+<!-- 按钮触发模态框 -->
+
+<!-- 模态框（Modal）register -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" 
+               aria-hidden="true">×
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+              Signin....	
+            </h4>
+         </div>
+         <div class="modal-body">
+         	<!-- -->
+         <div class="container">       	
+      <form class="form-signin" action ='/app/login/' method = 'POST'>
+        <label for="User" class="sr-only">User</label>
+        <input name = "username" type="user" style="width:480px" id="User" class="form-control"   placeholder="User " required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input name = "password" type="password" style="width:480px" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"  value="remember-me"> Remember me
+          </label>
+        </div>
+		
+    </div> <!-- /container -->
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">Close
+            </button>
+            <input type="submit" name="submit"  value="Signin..">
+            </button>
+              
+        </form>          
+         </div>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- 模态框（Modal2）singn -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" 
+               aria-hidden="true">×
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+            Register....
+            </h4>
+         </div>
+         <div class="modal-body">
+         	
+  <form class="form-signin" method = "post" action = "/app/register/">
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input name="email" type="email" style="width:480px" id="inputEmail" class="form-control"   placeholder="Email address" required autofocus>
+        <label for="inputUser" class="sr-only">User</label>
+        <input name="username" type="user" style="width:480px" id="inputUser" class="form-control" placeholder="User" required>
+         <div id ='r_tip'></div>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input name="password" type="password" style="width:480px" id="inputPassword" class="form-control" placeholder="Password" required>     
+           	
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">Close
+            </button>
+
+ 
+    <input type="submit" name="submit" id = 'register'value="register">
+  </form>
+         </div>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div id="wrap">
+<div class="container">
+  <div class="row">
+<div class="panel panel-warning">
+   <div class="panel-heading">
+      <h3 class="panel-title">Reloading later</h3>
+   </div>
+   <div class="panel-body">
+      <div class="row">
+      {% for list in plist %}
+   <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+         <img src="/static{{list.pi_photo}}"
+         alt="loading..."   class="img-responsive" >
+      </div>
+      <div class="caption">
+     <div class="clearfix">
+        <p class="set">
+          Name:{{ list.pi_name }}<br/>
+          No.:
+          <i class="number" id="bid{{ list.id }}">{{ list.id }}</i>
+          <br />
+          <span class="glyphicon glyphicon-heart-empty"  id="ticket{{ list.id }}">{{ list.pi_tickets }}</span><br />
+          Date:{{ list.pi_time}}<br/>
+        </p>
+
+    {% if user.is_authenticated %}
+<p class="right"><button style="color:green" type="button" onclick="myFunction{{ list.id }}()" class="btn btn-default " >
+  <span class="glyphicon glyphicon-thumbs-up"></span> Flower>>
+</button></p>
+{% else %}
+<p class="right"><button style="color:green" type="button"  class="btn btn-default " data-toggle="modal" data-target="#myModal">
+  <span class="glyphicon glyphicon-thumbs-up"></span> Flower>>
+</button></p>
+{% endif %}
+
+   <script>
+      function myFunction{{ list.id }}()
+      {
+          var bid = document.getElementById("bid{{ list.id }}").innerHTML;
+          $.get("/app/vote/",{'bid':bid}, function(ret){
+              $('#ticket{{ list.id }}').html(ret);
+          });
+      }
+    </script>
+
+      </div>
+     </div>
+   </div>
+{%endfor %}
+   
+      </div>
+   </div>
+</div>
+   </div>
+<p class="right"><button style="color:red" type="button" class="btn btn-default " >
+  <span class="glyphicon glyphicon-fire"></span> See More>>
+</button></p>
+</div>
+
+
+<div class="container">
+  <div class="row">
+<div class="panel panel-warning">
+   <div class="panel-heading">
+      <h3 class="panel-title">Top Four</h3>
+   </div>
+   <div class="panel-body">
+      <div class="row">
+      {% for list in toplist %}
+   <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+         <img src="/static{{list.pi_photo}}"
+         alt="loading..."   class="img-responsive" >
+      </div>
+      <div class="caption">
+     <div class="clearfix">
+        <p class="set">
+          Name:{{ list.pi_name }}<br/>
+          No.:
+          <i class="number" id="bd{{ list.id }}">{{ list.id }}</i>
+          <br />
+          <span class="glyphicon glyphicon-heart-empty"  id="tickets{{ list.id }}">{{ list.pi_tickets }}</span><br />
+         Date:{{ list.pi_time}}<br/>
+        </p>
+
+    {% if user.is_authenticated %}
+<p class="right"><button style="color:green" type="button" onclick="myfunction{{ list.id }}()" class="btn btn-default " >
+  <span class="glyphicon glyphicon-thumbs-up"></span> Flower>>
+</button></p>
+{% else %}
+<p class="right"><button style="color:green" type="button"  class="btn btn-default " data-toggle="modal" data-target="#myModal">
+  <span class="glyphicon glyphicon-thumbs-up"></span> Flower>>
+</button></p>
+{% endif %}
+
+
+   <script>
+      function myfunction{{ list.id }}()
+      {
+          var bid = document.getElementById("bd{{ list.id }}").innerHTML;
+          $.get("/app/vote/",{'bid':bid}, function(ret){
+              $('#tickets{{ list.id }}').html(ret);
+          });
+      }
+    </script>
+
+      </div>
+     </div>
+   </div>
+{%endfor %}
+   
+      </div>
+   </div>
+</div>
+   </div>
+<p class="right"><button style="color:red" type="button" class="btn btn-default " >
+  <span class="glyphicon glyphicon-fire"></span> See More>>
+</button></p>
+</div>
+
+
+
+
+</div>
+
+<!-- picture2 -->
+
+<!-- 底部back to top -->
+<footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2015 Design By Lemon. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
+  
+
+ 	<!--底部按钮-->
+  <div class="bot_main" style="text-align:center;margin-left:auto; margin-right:auto">
+    <ul style="list-style-type:none;padding:0">
+    <li class="ico_1"><a href="/app/?openid={{ openid }}"><span class="ico"><img src="{% static "img/i1.png" %}" /></span><span class="txt">首页</span></a></li>
+    <li class="ico_2"><a href="/app/?openid={{ openid }}"><span class="ico"><img src="{% static "img/i2.png" %}" /></span><span class="txt">排名</span></a></li>
+    <li class="ico_3"><a href="/app/"><span class="ico"><img src="{% static "img/i3.png" %}" /></span><span class="txt">报名</span></a></li>
+    <li class="ico_4"><a href="/app/"><span class="ico"><img src="{% static "img/i4.png" %}" /></span><span class="txt">拉票秘籍</span></a></li>
+    </ul>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+{% extends 'web/base.html' %}
+{% load staticfiles %}
+
+<!--图片展示-->
+{% block picshow %}
+<div class="container marketing">
+<div class="row">
+        <div class="col-lg-4">
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+	{% for babyinfo in topics %}
+	<li class="picCon">
+		<div>
+			<i class="number" id="bid{{ babyinfo.id }}">{{ babyinfo.id }}</i>
+			<a href="/weixin/details/?id={{babyinfo.id }}&openid={{ openid }}" class="img">     <!--图片超链接 -->
+				<!--img src="{% static "pic/1.jpg" %}" alt=""-->
+				<img  src="/static{{ babyinfo.pi_photo }}" alt="">
+			</a>
+			<div class="clearfix">
+				<p>
+					{{ babyinfo.pi_name }}<br/>
+					<span id="ticket{{ babyinfo.id }}">{{ babyinfo.pi_tickets }}</span>票
+				</p>
+				<button class="vote" id="vote" onclick="myFunction{{ babyinfo.id }}()">投票</button>
+			</div>
+		</div>
+		<script>
+			function myFunction{{ babyinfo.id }}()
+			{
+			    var bid = document.getElementById("bid{{ babyinfo.id }}").innerHTML
+				var openid = document.getElementById("openid").innerHTML
+			    $.get("/weixin/vote/",{'bid':bid, 'openid':openid}, function(ret){
+			        $('#ticket{{ babyinfo.id }}').html(ret);
+			    });
+			}
+		</script>
+	</li>
+{% endfor %}
+{% endblock %}
+
+<!--分页标签-->
+{% block label %}
+	<p style="text-align:center">
+	{% if topics.has_previous %}
+	  <a href="?page={{ topics.previous_page_number }}">上一页</a>
+	  {% endif %}
+	  {# topics.paginator.number_pages 返回总页数 #}
+	  Page {{ topics.number }} of {{ topics.paginator.num_pages }}.
+	{% if topics.has_next %}
+	  <a href="?page={{ topics.next_page_number }}">下一页</a>
+	{% endif %}
+	</p>
+{% endblock %}
+
+
+
